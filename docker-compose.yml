@@ -1,0 +1,9 @@
+version: '3'
+services:
+  openresty:
+    build:
+      context: ./container/openresty
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/usr/local/openresty/nginx/html
