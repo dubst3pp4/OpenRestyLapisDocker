@@ -3,6 +3,9 @@ services:
   openresty:
     build:
       context: ./container/openresty
+      args:
+        - DUID
+        - DGID
     ports:
       - "8080:8080"
     volumes:

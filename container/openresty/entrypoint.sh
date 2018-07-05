@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
+CMD="$@"
 APP=/app
-# check if installation in /app exists
 cd $APP/
 if [ ! -f $APP/nginx.conf ]; then
     echo "creating initial lapis project..."
-    lapis new --lua
-    echo "done"
+    lapis new "--lua"
+    if [ $? -ne 0 ]; then
+        echo "error creating project"
+        exit 1
+    fi
+    echo "done."
 fi
+chown -R nginx:nginx $APP
 echo "starting application..."
-exec "$@"
+exec su nginx -s /bin/bash -c "export PATH=$PATH && $CMD"
