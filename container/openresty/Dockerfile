@@ -7,5 +7,6 @@ RUN groupadd -g $DGID nginx && useradd -u $DUID -d /var/cache/nginx -s /sbin/nol
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 0755 /entrypoint.sh 
 WORKDIR /app
+ENV LAPIS_TYPE=lua
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["lapis", "server"]

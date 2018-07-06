@@ -4,7 +4,7 @@ APP=/app
 cd $APP/
 if [ ! -f $APP/nginx.conf ]; then
     echo "creating initial lapis project..."
-    lapis new "--lua"
+    lapis new `if [ ! -z $LAPIS_TYPE ]; then echo "--$LAPIS_TYPE"; fi`
     if [ $? -ne 0 ]; then
         echo "error creating project"
         exit 1
